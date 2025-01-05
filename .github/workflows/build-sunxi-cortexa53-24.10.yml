@@ -65,7 +65,7 @@ jobs:
               -e PROFILE=$profile \
               -e INCLUDE_DOCKER=$include_docker \
               -e ROOTSIZE=$size \
-              openwrt/imagebuilder:sunxi-cortexa53-openwrt-24.10 /bin/bash /home/build/openwrt/build.sh
+              openwrt/imagebuilder:sunxi-cortexa53-24.10.0-rc4 /bin/bash /home/build/openwrt/build.sh
           done
 
       - name: Generate Firmware SHA-256
