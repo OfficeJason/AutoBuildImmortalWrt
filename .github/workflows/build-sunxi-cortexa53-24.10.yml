@@ -68,7 +68,9 @@ jobs:
               openwrt/imagebuilder:sunxi-cortexa53-24.10.0-rc4 /bin/bash /home/build/openwrt/build.sh
           done
 
-     
+      - name: List bin dir
+        run: |
+          ls ${{ github.workspace }}/bin
       
       - name: Create info
         run: |
@@ -95,7 +97,7 @@ jobs:
         with:
           tag_name: Autobuild-sunxi-cortexa53
           files: |
-            ${{ github.workspace }}/*.img.gz
+            ${{ github.workspace }}/bin/*.img.gz
           token: ${{ secrets.GITHUB_TOKEN }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
