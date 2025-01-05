@@ -1,4 +1,4 @@
-name: build-sunxi-cortexa53-24.10-ImmpotalWrt
+name: build-sunxi-cortexa53-24.10-OpenWrt
 
 on:
   workflow_dispatch:
@@ -96,7 +96,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload ImmortWrt as release assets
+      - name: Upload OpenWrt as release assets
         uses: softprops/action-gh-release@v2.1.0
         with:
           tag_name: Autobuild-sunxi-cortexa53
