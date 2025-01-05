@@ -59,7 +59,7 @@ jobs:
             
             docker run --rm -i \
               --user root \
-              -v "${{ github.workspace }}/bin:/builder/bin/" \
+              -v "${{ github.workspace }}/bin:/builder/bin/targets/sunxi/cortexa53" \
               -v "${{ github.workspace }}/files:/home/build/openwrt/files" \
               -v "${{ github.workspace }}/sunxi-cortexa53/24.10/build.sh:/home/build/openwrt/build.sh" \
               -e PROFILE=$profile \
