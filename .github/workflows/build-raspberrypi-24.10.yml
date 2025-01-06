@@ -69,7 +69,7 @@ jobs:
               -e PROFILE=$profile \
               -e INCLUDE_DOCKER=$include_docker \
               -e ROOTSIZE=$size \
-              immortalwrt/imagebuilder:tag /bin/bash /home/build/openwrt/build.sh
+              immortalwrt/imagebuilder:$tag /bin/bash /home/build/openwrt/build.sh
           done
 
       - name: List bin dir
