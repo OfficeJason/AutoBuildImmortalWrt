@@ -9,8 +9,14 @@ uci set "dhcp.@domain[-1].name=time.android.com"
 uci set "dhcp.@domain[-1].ip=203.107.6.88"
 
 # 设置拨号信息
-pppoe_username="261010308764"
-pppoe_password="76232951"
+uci set network.lan.ipaddr='192.168.8.1'
+uci set network.wan.proto='pppoe'                
+uci set network.wan.username='261010308764'     
+uci set network.wan.password='76232951'     
+uci set network.wan.peerdns='1'                  
+uci set network.wan.auto='1'                     
+
+
 
 # 设置所有网口可访问网页终端
 uci delete ttyd.@ttyd[0].interface
