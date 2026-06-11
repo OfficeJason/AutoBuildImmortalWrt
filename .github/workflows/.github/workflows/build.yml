@@ -1,0 +1,36 @@
+name: Build-RAX3000M
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Clone ImmortalWrt
+        run: git clone https://github.com/immortalwrt/immortalwrt.git source
+
+      - name: Update Feeds
+        run: |
+          cd source
+          ./scripts/feeds update -a
+          ./scripts/feeds install -a
+
+      - name: Copy Config
+        run: cp ../.config source/.config
+
+      - name: Compile Firmware
+        run: |
+          cd source
+          make defconfig
+          make -j$(nproc)
+
+      - name: Upload Firmware
+        uses: actions/upload-artifact@v4
+        with:
+          name: firmware
+          path: |
+            source/bin/targets/mediatek/filogic/*
