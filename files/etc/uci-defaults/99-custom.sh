@@ -1,29 +1,36 @@
 #!/bin/sh
 
-# 设置默认防火墙规则，方便虚拟机首次访问 WebUI
-uci set firewall.@zone[1].input='ACCEPT'
 
 # 设置主机名映射，解决安卓原生 TV 无法联网的问题
 uci add dhcp domain
 uci set "dhcp.@domain[-1].name=time.android.com"
 uci set "dhcp.@domain[-1].ip=203.107.6.88"
 
+uci set network.lan.ipaddr='192.168.255.254'
+uci set network.lan.netmask='255.255.255.0'
+
+uci set wireless.@wifi-device[0].disabled='0'
+uci set wireless.@wifi-device[1].disabled='0'
+
+uci set wireless.@wifi-iface[0].ssid='AX3000M_2G'
+uci set wireless.@wifi-iface[1].ssid='AX3000M_5G'
 
 
+pppoe_username="1"
+pppoe_password="1"
 
-pppoe_username="261010308764"
-pppoe_password="76232951"
+uci commit network
+uci commit wireless
 
-# 设置所有网口可访问网页终端
-uci delete ttyd.@ttyd[0].interface
-
-# 设置所有网口可连接 SSH
-uci set dropbear.@dropbear[0].Interface=''
-uci commit
+/etc/init.d/network restart
+wifi reload
 
 # 设置编译作者信息
 FILE_PATH="/etc/openwrt_release"
-NEW_DESCRIPTION="Compiled by wukongdaily"
+NEW_DESCRIPTION="Compiled by cheng"
 sed -i "s/DISTRIB_DESCRIPTION='[^']*'/DISTRIB_DESCRIPTION='$NEW_DESCRIPTION'/" "$FILE_PATH"
+
+
+
 
 exit 0
